@@ -4,6 +4,8 @@ Estudo de BI operacional em uma rede fictícia de atendimento. A pergunta é **e
 
 ![Gráfico de faltas por unidade e turno. Centro à noite soma 53 faltas, seguido de Norte à noite com 48.](resultados/faltas.png)
 
+[Projeto editável e passo a passo no Power BI](power-bi/)
+
 ## O que aparece no cenário
 
 No conjunto de **2.400 agendamentos**, houve **320 faltas** e **229 cancelamentos**. A taxa de falta foi de **14,74% entre os 2.171 agendamentos elegíveis**.
@@ -34,4 +36,4 @@ python analysis.py
 python -m unittest -v
 ```
 
-O script gera a base de agendamentos e exporta [resumo](resultados/resumo.json), [segmentos](resultados/segmentos.csv) e [série mensal](resultados/mensal.csv). A definição dos KPIs está em [modelo.sql](modelo.sql). Os CSVs podem ser importados no Power BI ou no Excel.
+O script gera a [base de agendamentos](resultados/agendamentos.csv) e exporta [resumo](resultados/resumo.json), [segmentos](resultados/segmentos.csv) e [série mensal](resultados/mensal.csv). A definição dos KPIs está em [modelo.sql](modelo.sql). Os CSVs podem ser importados no Power BI ou no Excel.

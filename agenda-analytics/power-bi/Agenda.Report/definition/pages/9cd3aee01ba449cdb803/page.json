@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "9cd3aee01ba449cdb803",
+  "displayName": "Agenda Analytics | Dados sintéticos",
+  "displayOption": "FitToPage",
+  "width": 1280,
+  "height": 720
+}

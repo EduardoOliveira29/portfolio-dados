@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "00000000000000000002",
+  "position": {
+    "x": 340,
+    "y": 28,
+    "z": 2000,
+    "width": 288,
+    "height": 140,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Fields": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Agenda"
+                    }
+                  },
+                  "Property": "Cancelamentos"
+                }
+              },
+              "queryRef": "Agenda.Cancelamentos",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cancelamentos'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

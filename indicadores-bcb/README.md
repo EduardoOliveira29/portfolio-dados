@@ -17,7 +17,7 @@ O IPCA calculado reproduz, com duas casas decimais, o [resultado divulgado pelo 
 
 1. O Python lê a resposta da API ou o recorte versionado em [dados/](dados/).
 2. Padroniza a chave para `AAAA-MM`. Rejeita meses duplicados, taxas inválidas, lacunas e cobertura divergente.
-3. O SQLite aplica uma janela de 12 observações contíguas. A acumulação é composta: `produto(1 + taxa/100) - 1`. O SQL usa a soma dos logaritmos dos fatores, seguida da conversão de volta para percentual.
+3. Em SQL, um `JOIN` pelo mês coloca IPCA e Selic lado a lado. O Python percorre os últimos 12 meses e multiplica os fatores de variação. Dois meses de 1% acumulam 2,01%, pois `1,01 × 1,01 = 1,0201`.
 4. O [CSV final](resultados/indicadores.csv) tem uma linha por mês. Os primeiros 11 meses ficam sem acumulado por terem histórico insuficiente no recorte.
 
 ## Reproduzir

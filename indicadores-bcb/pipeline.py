@@ -45,16 +45,31 @@ def rolling_metrics(ipca, selic):
 
     with closing(sqlite3.connect(":memory:")) as db:
         db.row_factory = sqlite3.Row
-        db.create_function("log_factor", 1, lambda rate: math.log1p(rate / 100))
-        db.create_function("to_percent", 1, lambda total: 100 * math.expm1(total))
-        db.execute(
-            "CREATE TABLE serie_mensal (mes TEXT PRIMARY KEY, ipca REAL, selic REAL)"
+        db.executescript(
+            """
+            CREATE TABLE ipca (mes TEXT PRIMARY KEY, taxa REAL NOT NULL);
+            CREATE TABLE selic (mes TEXT PRIMARY KEY, taxa REAL NOT NULL);
+            """
         )
-        db.executemany(
-            "INSERT INTO serie_mensal VALUES (?, ?, ?)",
-            ((month, ipca[month], selic[month]) for month in months),
-        )
-        return [dict(row) for row in db.execute((ROOT / "metricas.sql").read_text("utf-8"))]
+        db.executemany("INSERT INTO ipca VALUES (?, ?)", ipca.items())
+        db.executemany("INSERT INTO selic VALUES (?, ?)", selic.items())
+        rows = [dict(row) for row in db.execute((ROOT / "metricas.sql").read_text("utf-8"))]
+
+    for index, row in enumerate(rows):
+        row["ipca_12m_pct"] = None
+        row["selic_12m_pct"] = None
+        if index >= 11:
+            window = rows[index - 11:index + 1]
+            row["ipca_12m_pct"] = compound(window, "ipca_mensal_pct")
+            row["selic_12m_pct"] = compound(window, "selic_mensal_pct")
+    return rows
+
+
+def compound(window, field):
+    factor = 1.0
+    for row in window:
+        factor *= 1 + row[field] / 100
+    return round((factor - 1) * 100, 8)
 
 
 def main():

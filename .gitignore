@@ -2,3 +2,5 @@ __pycache__/
 *.py[cod]
 *.sqlite*
 .venv/
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
