@@ -1,6 +1,6 @@
 import unittest
 
-from pipeline import normalize, rolling_metrics
+from analisar_indicadores import normalize, acumular, validar_calendario
 
 
 class SeriesTest(unittest.TestCase):
@@ -18,14 +18,15 @@ class SeriesTest(unittest.TestCase):
 
     def test_accumulates_by_compounding_and_waits_for_full_window(self):
         months = {f"2025-{month:02}": 1.0 for month in range(1, 13)}
-        output = rolling_metrics(months, months)
+        output = acumular([{"mes": m, "ipca_mensal_pct": taxa, "selic_mensal_pct": taxa}
+                           for m, taxa in months.items()])
         self.assertIsNone(output[10]["ipca_12m_pct"])
         self.assertAlmostEqual(output[11]["ipca_12m_pct"], (1.01**12 - 1) * 100)
 
     def test_rejects_a_calendar_gap_even_in_both_sources(self):
         months = {"2025-01": 0.2, "2025-03": 0.3}
         with self.assertRaisesRegex(ValueError, "lacuna"):
-            rolling_metrics(months, months)
+            validar_calendario(months, months)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-"""Package the synthetic agenda data in an editable Power BI project."""
+"""Monta o projeto editável do Power BI com os agendamentos fictícios."""
 
 import base64
 import json

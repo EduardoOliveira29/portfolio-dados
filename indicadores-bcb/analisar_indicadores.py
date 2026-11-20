@@ -1,11 +1,11 @@
-"""Normalize SGS data and calculate comparable monthly and rolling rates."""
+"""Consulta IPCA e Selic por mês no Oracle e calcula as taxas acumuladas."""
 
 import argparse
 import csv
 import json
 import math
-import sqlite3
-from contextlib import closing
+import os
+from getpass import getpass
 from datetime import datetime
 from pathlib import Path
 from urllib.request import urlopen
@@ -35,7 +35,7 @@ def normalize(rows):
     return months
 
 
-def rolling_metrics(ipca, selic):
+def validar_calendario(ipca, selic):
     months = sorted(ipca)
     if not months or ipca.keys() != selic.keys():
         raise ValueError("Séries vazias ou com cobertura mensal divergente")
@@ -43,18 +43,21 @@ def rolling_metrics(ipca, selic):
     if positions != list(range(positions[0], positions[-1] + 1)):
         raise ValueError("Séries com lacuna no calendário")
 
-    with closing(sqlite3.connect(":memory:")) as db:
-        db.row_factory = sqlite3.Row
-        db.executescript(
-            """
-            CREATE TABLE ipca (mes TEXT PRIMARY KEY, taxa REAL NOT NULL);
-            CREATE TABLE selic (mes TEXT PRIMARY KEY, taxa REAL NOT NULL);
-            """
-        )
-        db.executemany("INSERT INTO ipca VALUES (?, ?)", ipca.items())
-        db.executemany("INSERT INTO selic VALUES (?, ?)", selic.items())
-        rows = [dict(row) for row in db.execute((ROOT / "metricas.sql").read_text("utf-8"))]
+def juntar_series(db, ipca, selic):
+    import oracledb
 
+    def parametro(serie):
+        return json.dumps([{"mes": mes, "taxa": taxa} for mes, taxa in serie.items()])
+
+    with db.cursor() as cursor:
+        cursor.setinputsizes(ipca=oracledb.DB_TYPE_CLOB, selic=oracledb.DB_TYPE_CLOB)
+        cursor.execute((ROOT / "metricas.sql").read_text("utf-8"),
+                       ipca=parametro(ipca), selic=parametro(selic))
+        return [{"mes": mes, "ipca_mensal_pct": ipca_mes, "selic_mensal_pct": selic_mes}
+                for mes, ipca_mes, selic_mes in cursor]
+
+
+def acumular(rows):
     for index, row in enumerate(rows):
         row["ipca_12m_pct"] = None
         row["selic_12m_pct"] = None
@@ -73,8 +76,10 @@ def compound(window, field):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--atualizar", action="store_true", help="Baixar novamente o recorte SGS")
+    parser = argparse.ArgumentParser(description=__doc__, add_help=False, usage="%(prog)s [opções]")
+    opcoes = parser.add_argument_group("Opções")
+    opcoes.add_argument("-h", "--ajuda", "--help", action="help", help="Mostrar esta ajuda e sair")
+    opcoes.add_argument("--atualizar", action="store_true", help="Baixar novamente o recorte SGS")
     args = parser.parse_args()
     original_data = ROOT / "dados"
     if args.atualizar:
@@ -84,7 +89,13 @@ def main():
             name: json.loads((original_data / f"sgs-{code}.json").read_text("utf-8"))
             for name, code in SERIES.items()
         }
-    rows = rolling_metrics(*(normalize(snapshots[name]) for name in SERIES))
+    import oracledb
+
+    ipca, selic = (normalize(snapshots[name]) for name in SERIES)
+    validar_calendario(ipca, selic)
+    with oracledb.connect(user=os.environ["ORACLE_USER"], dsn=os.environ["ORACLE_DSN"],
+                          password=getpass("Senha do Oracle: ")) as db:
+        rows = acumular(juntar_series(db, ipca, selic))
     if len(rows) != 72 or rows[0]["mes"] != "2020-01" or rows[-1]["mes"] != "2025-12":
         raise ValueError("Recorte SGS incompleto: esperado janeiro de 2020 a dezembro de 2025")
     if args.atualizar:

@@ -1,4 +1,4 @@
-"""Regenerate the portfolio figures from the exported CSV files."""
+"""Gera os dois gráficos a partir dos CSVs de resultados."""
 
 import csv
 from datetime import date
@@ -8,7 +8,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 INK = "#17334a"
 TEAL = "#137c76"
 GOLD = "#9b5305"

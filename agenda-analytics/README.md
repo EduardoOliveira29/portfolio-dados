@@ -23,17 +23,16 @@ Centro à noite seria o primeiro recorte a investigar se a meta fosse recuperar 
 - **Grão**: uma linha por agendamento. Cada agendamento tem um desfecho, um turno e uma unidade.
 - **Elegíveis**: realizados e faltas. Cancelamentos são acompanhados à parte.
 - **Taxa de falta**: faltas divididas por elegíveis. Um grupo sem elegíveis retorna valor nulo.
-- **Qualidade**: chave primária, referência obrigatória à unidade, valores aceitos para desfecho e testes para o denominador.
+- **Qualidade**: identificadores únicos, unidades e desfechos válidos e conferência do denominador com a base publicada.
 
 Toda a base é **sintética**, gerada com uma semente fixa. O gerador embute diferenças entre turnos e unidades para permitir a prática de segmentação. Os números descrevem um exercício e o estudo não mede efeito de lembretes ou de outra intervenção.
 
+Conferência no Oracle SQL Developer com a base publicada: o resumo geral, os seis meses e os nove segmentos coincidiram com os resultados disponíveis nesta pasta.
+
 ## Reproduzir
 
-Na pasta deste projeto, com Python 3.10 ou superior:
+Configure a [conexão Oracle](../README.md#como-reproduzir-as-análises). Execute `python analisar_agenda.py` nesta pasta. O script envia os registros fictícios ao Oracle. A [base da consulta](modelo.sql) transforma cada agendamento em uma linha e marca as faltas e os elegíveis. A mesma consulta calcula o resumo geral, os resultados mensais e os segmentos por unidade e turno. O Python exporta cada recorte.
 
-```bash
-python analysis.py
-python -m unittest -v
-```
+[Agendamentos](resultados/agendamentos.csv) · [Resumo](resultados/resumo.json) · [Por unidade e turno](resultados/segmentos.csv) · [Por mês](resultados/mensal.csv)
 
-O script gera a [base de agendamentos](resultados/agendamentos.csv) e exporta [resumo](resultados/resumo.json), [segmentos](resultados/segmentos.csv) e [série mensal](resultados/mensal.csv). A definição dos KPIs está em [modelo.sql](modelo.sql). Os CSVs podem ser importados no Power BI ou no Excel.
+Para conferir a base publicada e as regras de validação sem uma conexão, execute `python -m unittest -v` nesta pasta.

@@ -1,8 +1,8 @@
 # Portfólio de Dados e BI
 
-Dois estudos reproduzíveis com Python e SQL. Cada caso parte de uma pergunta, documenta suas regras de negócio e entrega dados processados, testes e uma visualização.
+Dois estudos com Python, Oracle SQL e Power BI. Cada caso parte de uma pergunta, documenta suas regras de negócio e entrega dados processados, testes e uma visualização.
 
-[Roteiro de estudo e prática](COMECE-AQUI.md) · [Painel e exercício no Power BI](agenda-analytics/power-bi/)
+[Relatório editável em Power BI](agenda-analytics/power-bi/)
 
 | Projeto | Pergunta | Evidência |
 | --- | --- | --- |
@@ -11,6 +11,20 @@ Dois estudos reproduzíveis com Python e SQL. Cada caso parte de uma pergunta, d
 
 Minha base em Java aparece no [Defesa Ribeirinho](defesa-ribeirinho/), com um exemplo executável sobre confirmação de alertas e ocupação de abrigos. A [consulta de vendas por vendedor](pratica-vendas.sql) retoma um exercício de Java/JDBC da faculdade.
 
-**Execução:** Python 3.10+ e SQLite da biblioteca padrão. Cada pasta contém os comandos e os resultados do caso. Para regenerar as duas figuras, execute os pipelines, instale `matplotlib` e rode `python graficos.py` na raiz.
+## Como reproduzir as análises
 
-Os projetos foram preparados com assistência de IA como material de estudo e prática. As premissas e os testes estão no repositório para que os resultados possam ser reproduzidos e revisados.
+Os resultados e gráficos estão disponíveis em cada pasta. Para recalcular os indicadores, use Python 3.10 ou superior, o driver oficial e uma conexão Oracle com suporte a JSON_TABLE. Os scripts executam apenas consultas SELECT. Os dados são enviados como parâmetros, sem criar objetos no banco.
+
+No PowerShell, a partir da raiz do repositório:
+
+```powershell
+python -m pip install -r requirements.txt
+$env:ORACLE_USER = "seu_usuario"
+$env:ORACLE_DSN = "servidor:1521/servico"
+python agenda-analytics/analisar_agenda.py
+python indicadores-bcb/analisar_indicadores.py
+```
+
+Digite a senha no terminal quando o script pedir. Para reconstruir as figuras a partir dos CSVs, instale `matplotlib` e execute [gerar_graficos.py](ferramentas/gerar_graficos.py).
+
+Os projetos foram preparados com assistência de IA para estudo. As fontes, as regras de cálculo e os resultados acompanham o código.
