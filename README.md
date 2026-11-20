@@ -11,6 +11,14 @@ Dois estudos com Python, Oracle SQL e Power BI. Cada caso parte de uma pergunta,
 
 ![Faltas por unidade e turno na agenda sintética](agenda-analytics/resultados/faltas.png)
 
+## UniCare+
+
+**FIAP Challenge com a Unimed Nacional · Projeto acadêmico em equipe**
+
+No UniCare+, uma aplicação de cuidado preventivo, participei do levantamento de requisitos, da documentação e da estruturação do banco. Na Sprint 4, a equipe integrou a aplicação Java ao Oracle Database via JDBC. Usamos dados fictícios para testar a classificação de perfis e os alertas do painel.
+
+## Outros projetos em Java
+
 Minha base em Java aparece no [Defesa Ribeirinho](defesa-ribeirinho/), com um exemplo executável sobre confirmação de alertas e ocupação de abrigos. A [consulta de vendas por vendedor](pratica-vendas.sql) retoma um exercício de Java/JDBC da faculdade.
 
 ## Como reproduzir as análises
