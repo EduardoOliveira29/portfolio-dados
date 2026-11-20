@@ -1,0 +1,10 @@
+unidade,turno,marcados,elegiveis,faltas,cancelados,taxa_falta_pct
+Centro,Noite,291,265,53,26,20.0
+Norte,Noite,251,227,48,24,21.15
+Sul,Noite,268,236,40,32,16.95
+Norte,Tarde,256,237,38,19,16.03
+Norte,Manha,270,243,35,27,14.4
+Centro,Tarde,258,235,34,23,14.47
+Sul,Manha,268,242,27,26,11.16
+Sul,Tarde,256,230,23,26,10.0
+Centro,Manha,282,256,22,26,8.59
