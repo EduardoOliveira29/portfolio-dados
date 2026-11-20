@@ -2,7 +2,7 @@
 
 Dois estudos com Python, Oracle SQL e Power BI. Cada caso parte de uma pergunta, documenta suas regras de negócio e entrega dados processados, testes e uma visualização.
 
-[Relatório editável em Power BI](agenda-analytics/power-bi/)
+[Relatório editável em Power BI](agenda-analytics/power-bi/) · [LinkedIn](https://www.linkedin.com/in/eduardo-oliveirapereira/) · [eduardooliveira0629@gmail.com](mailto:eduardooliveira0629@gmail.com)
 
 | Projeto | Pergunta | Evidência |
 | --- | --- | --- |

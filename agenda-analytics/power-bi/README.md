@@ -8,7 +8,7 @@ O projeto tem uma página com quatro cartões, faltas por unidade e turno e evol
 2. Se sua versão pedir, ative os formatos Power BI Project e PBIR em **Arquivo → Opções e configurações → Opções → Recursos de visualização** e reinicie o aplicativo.
 3. Clique em **Atualizar** para carregar a base sintética incorporada. Confira **2.400** agendamentos, **229** cancelamentos, **320** faltas e **14,74%** de taxa.
 
-Os arquivos foram conferidos contra os esquemas publicados pela Microsoft. A conferência em tela depende do Power BI Desktop, que não estava instalado no ambiente de preparação. [Documentação do formato PBIP](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview)
+Os arquivos passaram pela validação dos esquemas da Microsoft. A exibição no Power BI Desktop ainda precisa de verificação. [Documentação do formato PBIP](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview)
 
 ## Indicador de faltas
 

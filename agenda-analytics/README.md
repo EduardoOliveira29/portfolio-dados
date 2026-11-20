@@ -4,7 +4,7 @@ Estudo de BI operacional em uma rede fictícia de atendimento. A pergunta é **e
 
 ![Gráfico de faltas por unidade e turno. Centro à noite soma 53 faltas, seguido de Norte à noite com 48.](resultados/faltas.png)
 
-[Projeto editável e passo a passo no Power BI](power-bi/)
+[Painel de agendamentos em Power BI](power-bi/)
 
 ## O que aparece no cenário
 
