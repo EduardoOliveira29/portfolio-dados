@@ -24,6 +24,8 @@ python -c "import sqlite3; from analysis import build, generate; db = sqlite3.co
 
 **Sua mudança:** adicione `unidade_id` ao `SELECT` e ao `GROUP BY`. Compare o grupo com mais faltas com o de maior taxa no CSV de segmentos. Por que eles são diferentes?
 
+Se quiser começar com uma base menor, rode [pratica-vendas.sql](pratica-vendas.sql) em um banco SQLite vazio. O exemplo adapta o `JOIN` de um exercício da FIAP sobre vendas. Compare as três linhas detalhadas com as duas linhas agrupadas. Ana deve aparecer com duas vendas e R$ 200 no total.
+
 ## 2. Refaça a visualização no Power BI
 
 Abra o [guia do painel](agenda-analytics/power-bi/). Reproduza primeiro um cartão de total e um de taxa de falta. Depois crie um filtro de turno e confirme que os cartões mudam.
