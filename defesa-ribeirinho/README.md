@@ -14,7 +14,7 @@ O projeto acadêmico usa Java 21, Spring Boot, JPA e uma API JSON, com H2 local 
 
 A confirmação é contada **por família avisada**. Duas das três confirmaram, o que dá 66,7%. A ocupação é contada **por pessoa presente**. A família A ocupa quatro das dez vagas, ou 40%. A família B entra no primeiro cálculo e só entraria no segundo após o check-in.
 
-## Rode e mude o cenário
+## Execução
 
 Com um JDK 21 ou superior, abra um terminal nesta pasta e execute:
 
@@ -22,6 +22,6 @@ Com um JDK 21 ou superior, abra um terminal nesta pasta e execute:
 java ResumoAbrigo.java
 ```
 
-O exemplo imprime os dois percentuais e seis vagas disponíveis. Para simular a chegada da família B, troque `new Familia(2, true, false)` por `new Familia(2, true, true)`. Antes de rodar de novo, tente prever qual percentual muda. A nova ocupação deve ser 60%, com quatro vagas disponíveis e as mesmas duas confirmações.
+A execução retorna duas confirmações, quatro vagas ocupadas e seis disponíveis. Se a família B também chegar ao abrigo, a ocupação sobe para 60% e a quantidade de confirmações permanece a mesma.
 
 O exemplo usa um único aviso, um abrigo e uma fotografia do momento. Para analisar várias datas, seria preciso saber quem estava acolhido no instante de cada medição. Somar todos os check-ins da semana contaria também quem já saiu.
