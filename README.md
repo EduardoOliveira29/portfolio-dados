@@ -4,10 +4,12 @@ Dois estudos com Python, Oracle SQL e Power BI. Cada caso parte de uma pergunta,
 
 [Relatório editável em Power BI](agenda-analytics/power-bi/) · [LinkedIn](https://www.linkedin.com/in/eduardo-oliveirapereira/) · [eduardooliveira0629@gmail.com](mailto:eduardooliveira0629@gmail.com)
 
-| Projeto | Pergunta | Evidência |
+| Estudo | Resultado | Ferramentas |
 | --- | --- | --- |
-| [Indicadores do Banco Central](indicadores-bcb/) | Como IPCA e Selic acumulados em 12 meses evoluíram entre 2020 e 2025? | API pública, validação de cobertura, `JOIN` por mês e conferência com o IBGE |
-| [Agenda Analytics](agenda-analytics/) | Onde faz mais sentido começar a investigar faltas em agendamentos? | Base sintética, SQL por segmento, medidas DAX e painel editável no Power BI |
+| [Faltas em agendamentos](agenda-analytics/) | Na agenda fictícia, Centro à noite teve mais faltas (53). Norte à noite teve a maior taxa (21,15%). A prioridade muda conforme o objetivo da operação. | Oracle SQL e Power BI |
+| [IPCA e Selic](indicadores-bcb/) | Em dezembro de 2025, o IPCA acumulado em 12 meses foi de 4,26%. A análise cruza 72 meses de dados do Banco Central e confere o resultado com o IBGE. | Python e Oracle SQL |
+
+![Faltas por unidade e turno na agenda sintética](agenda-analytics/resultados/faltas.png)
 
 Minha base em Java aparece no [Defesa Ribeirinho](defesa-ribeirinho/), com um exemplo executável sobre confirmação de alertas e ocupação de abrigos. A [consulta de vendas por vendedor](pratica-vendas.sql) retoma um exercício de Java/JDBC da faculdade.
 
